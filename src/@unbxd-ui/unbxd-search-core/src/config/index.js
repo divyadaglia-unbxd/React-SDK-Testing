@@ -58,7 +58,7 @@ const options = {
         }
     },
     applyMultipleFilters:false,
-    hashMode:false,
+    hashMode:true,
     pagination:{
         type:"INFINITE_SCROLL"
     },

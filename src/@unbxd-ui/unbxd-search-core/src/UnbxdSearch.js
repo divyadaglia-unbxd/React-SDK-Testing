@@ -80,7 +80,7 @@ class UnbxdSearch {
         if(typeof onQueryRedirect === "function") {
             onQueryRedirect(this, redirect);
         }
-        const q = this.getNewUrlState(true).split(`${productType.toLocaleLowerCase()}?`)[1];
+        const q = this.getNewUrlState({encode: true, fetchApiUrl: false}).split(`${productType.toLocaleLowerCase()}?`)[1];
         this.state.urlState = q;
         const isPath = location.pathname.includes(searchPath);
         if(hashMode) {

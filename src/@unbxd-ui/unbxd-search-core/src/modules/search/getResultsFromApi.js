@@ -26,7 +26,9 @@ export default  function(query = "", newUrl=true) {
     const newVal = (query === "") ? encodeURIComponent(userInput) : query;
     this.state.userInput = newVal;
     
-    this.state.currentUrl =this.getNewUrlState();
+    this.state.currentApiUrl =this.getNewUrlState({encode: false, fetchApiUrl: true});
+    this.state.currentWebUrl =this.getNewUrlState({encode: true, fetchApiUrl: false});
+
     if(this.state.isLoading) {
         return false;
     }
@@ -41,7 +43,7 @@ export default  function(query = "", newUrl=true) {
     } = this.options;
     if(!hashMode && updateUrls && !isHistory && !isBack) {
         this.state.isBack = false;
-        const q = this.state.currentUrl.split(`${productType.toLocaleLowerCase()}?`)[1];
+        const q = this.state.currentWebUrl.split(`${productType.toLocaleLowerCase()}?`)[1];
         if(decodeURIComponent(location.search) !== `?${decodeURIComponent(q)}`){
             this.setUrl(true);
             return false;
@@ -51,7 +53,7 @@ export default  function(query = "", newUrl=true) {
         spellCheck
     } = this.options;
     this.callBack(this, libEvents.beforeApiCall);
-    const fetchPromise = fetch(this.state.currentUrl);
+    const fetchPromise = fetch(this.state.currentApiUrl);
     const errorHandler = (error) => {
         this.state.isLoading = false;
         this.state.userInput = decodeURIComponent(newVal);

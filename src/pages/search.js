@@ -30,11 +30,21 @@ export default function Search() {
   const [showFilters, setShowFilters] = useState(false);
   const handleClose = () => setShowFilters(false);
   const handleShow = () => setShowFilters(true);
-  const searchConfigurations = {
-    updateUrls: false,
-    searchQueryParam: 'q',
-    hashMode: false,
-  };
+  // const searchConfigurations = {
+  //   updateUrls: false,
+  //   searchQueryParam: 'q',
+  //   hashMode: false,
+  // };
+  const searchConfigurations={
+    hashMode: true,
+    updateUrls: true,
+    pageSize: 30,
+    enableUnbxdAnalytics: true,
+    facetDepth: 6,
+    extraParams: {
+    version: "V2",
+    },
+  }
   console.log(state, 'state');
 
   const handleRouteChange = (searchObj, hash, refreshId) => {

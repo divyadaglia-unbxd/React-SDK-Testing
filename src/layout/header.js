@@ -74,7 +74,7 @@ export default function Header() {
                     type: SEARCH_ACTION,
                     searchTerm: searchInput,
                   });
-                  navigate(`/search?q=${searchInput}`);
+                  navigate(`/search#q=${searchInput}`);
                 }}
                 sx={{ p: '10px' }}
                 aria-label="search"

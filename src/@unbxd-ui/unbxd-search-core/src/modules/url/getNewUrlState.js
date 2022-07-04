@@ -1,4 +1,4 @@
-export default function (encode = false) {
+export default function ({encode = false, fetchApiUrl = true}) {
     const {
         productType,
         searchQueryParam,
@@ -40,7 +40,7 @@ export default function (encode = false) {
     const categoryFilterStr = this.categoryFilterUrlStr();
     let fctmulty = (this.options.facetMultiSelect)?"&facet.multiselect=true":"&facet.multiselect=false";
     const facetV2 = "&facet.version=V2";
-    const nowUrl = this.url +
+    const apiUrl = this.url +
         categoryFilterStr +
         fctmulty +
         facetsUrlString +
@@ -57,8 +57,27 @@ export default function (encode = false) {
         this.getPageStartStr()+
         this.extraParamUrlString()+
         facetV2;
-    if(!encode) {
-        this.state.currentUrl = nowUrl
+
+        const webUrl = this.url +
+        categoryFilterStr +
+        facetsUrlString +
+        showVariantsStr +
+        variantsGroupByStr +
+        sortStr+
+        spellCheckUrlString+
+        rangeFilterUrlStr+
+        pagetype+
+        this.getPageSizeStr()+
+        this.getPageStartStr()+
+        facetV2;
+
+        this.state.currentApiUrl = apiUrl
+        this.state.currentWebUrl = webUrl
+    
+    if(fetchApiUrl) {
+        return apiUrl ;
+    } else {
+        return webUrl;
     }
-    return nowUrl ;
+    
 };
